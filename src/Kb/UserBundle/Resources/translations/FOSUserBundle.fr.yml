@@ -1,0 +1,5 @@
+# Form field labels
+form:
+    user_type: "Type :"
+    lastname: "Nom :"
+    firstname: "Prénom :"

@@ -1,0 +1,7 @@
+parameters:
+#    kb_core.example.class: Kb\CarBundle\Example
+
+services:
+#    kb_core.example:
+#        class: %kb_core.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

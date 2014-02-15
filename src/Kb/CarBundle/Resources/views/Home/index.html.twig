@@ -1,0 +1,27 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+<div class="row">
+   
+    {% for car in cars %}
+        <div class="product col-lg-3">
+            <figure>
+                <img src="media/car/medium/1.jpg" />
+            </figure>
+                <h5><a href="#">{{car.name}}</a></h5>
+                <p>{{car.description}}</p>
+                <p>
+                    <span>{{car.nbKm}} Km</span>
+                    <span style="float:right"><b>{{car.amount}} {{car.unitAmount}}</b></span>
+                </p>
+                <p>
+                    <span><label class="label label-success">Disponible</label></span>
+                    <span style="float:right">
+                      
+                        <button class="btn-sm btn btn-primary">Réserver</button>
+                    </span>
+                </p>
+            
+        </div>
+    {% endfor %}
+</div>   
+{% endblock %}

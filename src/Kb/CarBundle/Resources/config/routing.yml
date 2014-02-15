@@ -1,0 +1,3 @@
+kb_car_homepage:
+    pattern:  /
+    defaults: { _controller: KbCarBundle:Home:index }

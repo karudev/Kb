@@ -1,0 +1,10 @@
+.custom-container{
+    margin-top: 70px;
+}
+.product{
+    border: 1px solid #CCC;
+    margin: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}

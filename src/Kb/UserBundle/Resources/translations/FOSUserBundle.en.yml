@@ -1,0 +1,3 @@
+# Form field labels
+form:
+    user_type: "Type :"

@@ -1,0 +1,96 @@
+<?php
+
+// src/Acme/UserBundle/Entity/User.php
+
+namespace Cyr\UserBundle\Entity;
+
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="user")
+ */
+class User extends BaseUser {
+
+    const ROLE_COMPANY = 'ROLE_COMPANY';
+    const ROLE_CUSTOMER = 'ROLE_CUSTOMER';
+
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    
+    /**
+     * @var string 
+     * @ORM\Column(name="firstname", type="string", length=128)
+     */
+    private $firstname;
+    
+    /**
+     * @var string 
+     * @ORM\Column(name="lastname", type="string", length=128)
+     */
+    private $lastname;
+
+     /**
+     * @var string 
+     * @ORM\Column(name="phone", type="string", length=10)
+     */
+    private $phone;
+    
+     /**
+     * @var string 
+     * @ORM\Column(name="mobile", type="string", length=10)
+     */
+    private $mobile;
+    
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="UserType")
+     * @ORM\JoinColumn(name="user_type_id", referencedColumnName="id")
+     */
+    private $userType;
+
+    public function __construct() {
+        parent::__construct();
+        // your own logic
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * Set userType
+     *
+     * @param \Cyr\UserBundle\Entity\UserType $userType
+     * @return User
+     */
+    public function setUserType(\Cyr\UserBundle\Entity\UserType $userType = null) {
+        
+        $this->roles[] = $userType->getId() == 1 ? self::ROLE_COMPANY : self::ROLE_CUSTOMER;
+         
+        $this->userType = $userType;
+
+        return $this;
+    }
+
+    /**
+     * Get userType
+     *
+     * @return \Cyr\UserBundle\Entity\UserType 
+     */
+    public function getUserType() {
+        return $this->userType;
+    }
+   
+
+}
