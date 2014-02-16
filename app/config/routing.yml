@@ -1,4 +1,8 @@
 kb_core:
+    resource: "@KbCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
+kb_core:
     resource: "@KbCarBundle/Resources/config/routing.yml"
     prefix:   /
 

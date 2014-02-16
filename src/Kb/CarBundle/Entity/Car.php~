@@ -76,30 +76,21 @@ class Car {
     private $nbKm;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="amount", type="float")
+     * @ORM\OneToMany(targetEntity="Car", mappedBy="car")
      */
-    private $amount;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="unit_amount", type="string", length=4)
-     */
-    private $unitAmount;
+    private $pricings;
 
     /**
      * @ORM\ManyToOne(targetEntity="Mark", inversedBy="Car")
      * @ORM\JoinColumn(name="mark_id", referencedColumnName="id")
      */
-    private $markId;
+    private $mark;
 
     /**
      * @ORM\ManyToOne(targetEntity="Engine", inversedBy="Car")
      * @ORM\JoinColumn(name="engine_id", referencedColumnName="id")
      */
-    private $engineId;
+    private $engine;
 
     /**
      * @var integer
@@ -146,7 +137,7 @@ class Car {
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=255)
+     * @ORM\Column(name="slug", type="string", length=255, nullable=true)
      */
     private $slug;
 
@@ -284,48 +275,7 @@ class Car {
     public function getNbKm() {
         return $this->nbKm;
     }
-
-    /**
-     * Set amount
-     *
-     * @param float $amount
-     * @return Car
-     */
-    public function setAmount($amount) {
-        $this->amount = $amount;
-
-        return $this;
-    }
-
-    /**
-     * Get amount
-     *
-     * @return float 
-     */
-    public function getAmount() {
-        return $this->amount;
-    }
-
-    /**
-     * Set unitAmount
-     *
-     * @param string $unitAmount
-     * @return Car
-     */
-    public function setUnitAmount($unitAmount) {
-        $this->unitAmount = $unitAmount;
-
-        return $this;
-    }
-
-    /**
-     * Get unitAmount
-     *
-     * @return string 
-     */
-    public function getUnitAmount() {
-        return $this->unitAmount;
-    }
+    
 
     /**
      * Set nbSpace
@@ -455,45 +405,45 @@ class Car {
     }
 
     /**
-     * Set markId
+     * Set mark
      *
-     * @param \Kb\CarBundle\Entity\Mark $markId
+     * @param \Kb\CarBundle\Entity\Mark $mark
      * @return Car
      */
-    public function setMarkId(\Kb\CarBundle\Entity\Mark $markId = null) {
-        $this->markId = $markId;
+    public function setMark(\Kb\CarBundle\Entity\Mark $mark = null) {
+        $this->mark = $mark;
 
         return $this;
     }
 
     /**
-     * Get markId
+     * Get mark
      *
      * @return \Kb\CarBundle\Entity\Mark 
      */
-    public function getMarkId() {
-        return $this->markId;
+    public function getMark() {
+        return $this->mark;
     }
 
     /**
-     * Set engineId
+     * Set engine
      *
-     * @param \Kb\CarBundle\Entity\Engine $engineId
+     * @param \Kb\CarBundle\Entity\Engine $engine
      * @return Car
      */
-    public function setEngineId(\Kb\CarBundle\Entity\Engine $engineId = null) {
-        $this->engineId = $engineId;
+    public function setEngine(\Kb\CarBundle\Entity\Engine $engine = null) {
+        $this->engine = $engine;
 
         return $this;
     }
 
     /**
-     * Get engineId
+     * Get engine
      *
      * @return \Kb\CarBundle\Entity\Engine 
      */
-    public function getEngineId() {
-        return $this->engineId;
+    public function getEngine() {
+        return $this->engine;
     }
 
     /**
@@ -503,7 +453,7 @@ class Car {
      * @return Car
      */
     public function setSlug($slug) {
-        if ($slug == null) {
+        if ($slug == null || $slug == true) {
             $slug = $this->getId() . '-' . str_replace(' ', '-', $this->getName());
         }
         $this->slug = $slug;
@@ -518,6 +468,53 @@ class Car {
      */
     public function getSlug() {
         return $this->slug;
+    }
+
+
+    /**
+     * Set nbDoor
+     *
+     * @param integer $nbDoor
+     * @return Car
+     */
+    public function setNbDoor($nbDoor)
+    {
+        $this->nbDoor = $nbDoor;
+
+        return $this;
+    }
+
+    /**
+     * Get nbDoor
+     *
+     * @return integer 
+     */
+    public function getNbDoor()
+    {
+        return $this->nbDoor;
+    }
+
+    /**
+     * Set dateRelease
+     *
+     * @param \DateTime $dateRelease
+     * @return Car
+     */
+    public function setDateRelease($dateRelease)
+    {
+        $this->dateRelease = $dateRelease;
+
+        return $this;
+    }
+
+    /**
+     * Get dateRelease
+     *
+     * @return \DateTime 
+     */
+    public function getDateRelease()
+    {
+        return $this->dateRelease;
     }
 
 }

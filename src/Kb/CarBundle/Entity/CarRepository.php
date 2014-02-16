@@ -12,11 +12,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class CarRepository extends EntityRepository {
 
-    public function getCars($isActive = null) {
+    public function getCarsBySeasion(\DateTime $date, $isActive = null) {
 
         $qb = $this->createQueryBuilder('c');
+        $qb->select('c.name,c.description,c.nbKm,p.amount,p.unitAmount');
+        $qb->innerJoin('c.pricings', 'p','WITH','p.priceByDefault = 1')
+                ->innerJoin('p.seasion', 's')
+                ->where('s.dateStart <= :date and s.dateEnd >= :date')
+                ->setParameter('date', $date);
+         
         if ($qb != null) {
-            $qb->where('c.isActive = :isActive')
+            $qb->andWhere('c.isActive = :isActive')
                     ->setParameter('isActive', $isActive);
         }
        return $qb->getQuery()

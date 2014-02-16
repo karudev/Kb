@@ -19,8 +19,6 @@ class LoadCarData extends AbstractFixture implements OrderedFixtureInterface {
             'nbKm' => 65000,
             'nbSpace' => 5,
             'nbDoor' => 5,
-            'amount' => 23,
-            'unitAmount' => '€/Jrs',
             'user' => 'drenault',
             'isConditioned' => false,
             'gearbox' => 'Manuelle'
@@ -34,14 +32,12 @@ class LoadCarData extends AbstractFixture implements OrderedFixtureInterface {
             'nbKm' => 70000,
             'nbSpace' => 5,
             'nbDoor' => 5,
-            'amount' => 25,
-            'unitAmount' => '€/Jrs',
             'user' => 'drenault',
             'isConditioned' => true,
             'gearbox' => 'Manuelle'
         ),
          array(
-            'name' => 'Fiat PUNTO EVO 5 portes climatisée diesel récente',
+            'name' => 'Fiat PUNTO EVO 5 portes climatisée diesel récente 2',
             'description' => 'Véhicules pour 4/5 personnes, 90CV, toutes options, climatisés, commande au volant, système start and stop, poste CD avec port USB.',
             'color' => 'blanche',
             'engine' => 'Diesel',
@@ -49,14 +45,12 @@ class LoadCarData extends AbstractFixture implements OrderedFixtureInterface {
             'nbKm' => 70000,
             'nbSpace' => 5,
             'nbDoor' => 5,
-            'amount' => 25,
-            'unitAmount' => '€/Jrs',
             'user' => 'drenault',
             'isConditioned' => true,
             'gearbox' => 'Manuelle'
         ),
          array(
-            'name' => 'Fiat PUNTO EVO 5 portes climatisée diesel récente',
+            'name' => 'Fiat PUNTO EVO 5 portes climatisée diesel récente 3',
             'description' => 'Véhicules pour 4/5 personnes, 90CV, toutes options, climatisés, commande au volant, système start and stop, poste CD avec port USB.',
             'color' => 'blanche',
             'engine' => 'Diesel',
@@ -64,8 +58,6 @@ class LoadCarData extends AbstractFixture implements OrderedFixtureInterface {
             'nbKm' => 70000,
             'nbSpace' => 5,
             'nbDoor' => 5,
-            'amount' => 25,
-            'unitAmount' => '€/Jrs',
             'user' => 'drenault',
             'isConditioned' => true,
             'gearbox' => 'Manuelle'
@@ -92,8 +84,6 @@ class LoadCarData extends AbstractFixture implements OrderedFixtureInterface {
                     ->setNbDoor($value['nbDoor'])
                     ->setNbSpace($value['nbSpace'])
                     ->setNbKm($value['nbKm'])
-                    ->setAmount($value['amount'])
-                    ->setUnitAmount($value['unitAmount'])
                     ->setCreatedAt(new \DateTime)
                     ->setUpdatedAt(new \DateTime)
                     ->setCreatedBy($this->getReference('user_'.$value['user']))
@@ -102,6 +92,8 @@ class LoadCarData extends AbstractFixture implements OrderedFixtureInterface {
                     ->setIsActive(true)
                     ->setGearbox($value['gearbox'])
                     ->setDateRelease($dateRelease);
+            
+            $this->addReference('car_'.$value['name'], $object);
             $manager->persist($object);
             $manager->flush();
             

@@ -76,18 +76,9 @@ class Car {
     private $nbKm;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="amount", type="float")
+     * @ORM\OneToMany(targetEntity="Kb\CoreBundle\Entity\Pricing", mappedBy="car")
      */
-    private $amount;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="unit_amount", type="string", length=4)
-     */
-    private $unitAmount;
+    private $pricings;
 
     /**
      * @ORM\ManyToOne(targetEntity="Mark", inversedBy="Car")
@@ -284,48 +275,7 @@ class Car {
     public function getNbKm() {
         return $this->nbKm;
     }
-
-    /**
-     * Set amount
-     *
-     * @param float $amount
-     * @return Car
-     */
-    public function setAmount($amount) {
-        $this->amount = $amount;
-
-        return $this;
-    }
-
-    /**
-     * Get amount
-     *
-     * @return float 
-     */
-    public function getAmount() {
-        return $this->amount;
-    }
-
-    /**
-     * Set unitAmount
-     *
-     * @param string $unitAmount
-     * @return Car
-     */
-    public function setUnitAmount($unitAmount) {
-        $this->unitAmount = $unitAmount;
-
-        return $this;
-    }
-
-    /**
-     * Get unitAmount
-     *
-     * @return string 
-     */
-    public function getUnitAmount() {
-        return $this->unitAmount;
-    }
+    
 
     /**
      * Set nbSpace
@@ -565,5 +515,46 @@ class Car {
     public function getDateRelease()
     {
         return $this->dateRelease;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->pricings = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add pricings
+     *
+     * @param \Kb\CarBundle\Entity\Car $pricings
+     * @return Car
+     */
+    public function addPricing(\Kb\CarBundle\Entity\Car $pricings)
+    {
+        $this->pricings[] = $pricings;
+
+        return $this;
+    }
+
+    /**
+     * Remove pricings
+     *
+     * @param \Kb\CarBundle\Entity\Car $pricings
+     */
+    public function removePricing(\Kb\CarBundle\Entity\Car $pricings)
+    {
+        $this->pricings->removeElement($pricings);
+    }
+
+    /**
+     * Get pricings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPricings()
+    {
+        return $this->pricings;
     }
 }

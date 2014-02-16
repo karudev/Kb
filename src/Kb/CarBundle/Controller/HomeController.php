@@ -12,7 +12,8 @@ class HomeController extends Controller
      */
     public function indexAction()
     {
-       $cars = $this->getDoctrine()->getRepository('KbCarBundle:Car')->getCars(true);
+       $cars = $this->getDoctrine()->getRepository('KbCarBundle:Car')->getCarsBySeasion(new \DateTime(), true);
+     
        return array('cars' => $cars);
     }
 }
